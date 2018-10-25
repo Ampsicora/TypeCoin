@@ -10,5 +10,5 @@ TypeCoin is a little Blockchain written in TypeScript as demo to better understa
 # More
 TypeCoin has been developed thanks to Simply Explained's channel. If you'd like to make the same, here you'll find what you need:
 
-- [What is a Blockchain?](https://www.youtube.com/watch?v=SSo_EIwHSd4&list=PLzvRQMJ9HDiSbvXWQ7OdgVccdr7Wni5Qw&index=2)
-- [How to build a Blockchain](https://www.youtube.com/watch?v=zVqczFZr124&list=PLzvRQMJ9HDiTqZmbtFisdXFxul5k0F-Q4)
+- <a href="https://www.youtube.com/watch?v=SSo_EIwHSd4&list=PLzvRQMJ9HDiSbvXWQ7OdgVccdr7Wni5Qw&index=2" target="_blank">What is a Blockchain?</a>
+- <a href="https://www.youtube.com/watch?v=zVqczFZr124&list=PLzvRQMJ9HDiTqZmbtFisdXFxul5k0F-Q4" target="_blank">How to build a Blockchain</a>
