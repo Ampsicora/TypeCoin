@@ -1,5 +1,5 @@
 
-import { SHA256 } from "crypto-js";
+import { sha256 } from "js-sha256";
 
 
 class Block 
@@ -7,6 +7,7 @@ class Block
   private index: number;
   private timestamp: string;
   private data: string;
+  private nonce: number = 0;
   public hash: string;
   public previousHash: string;
 
@@ -22,9 +23,20 @@ class Block
   }
 
 
-  public calculateHash(): string 
+  public calculateHash (): string 
   {
-    return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data)).toString();
+    return sha256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data) + this.nonce).toString();
+  }
+
+  public mineBlock (difficulty: number): void
+  {
+    while (this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0"))
+    {
+      this.hash = this.calculateHash();
+      this.nonce++;
+    }
+
+    console.log("Block Mined: " + this.hash);
   }
 }
 
@@ -33,6 +45,7 @@ class Block
 class Blockchain
 {
   private chain: Block[];
+  private difficulty: number = 4;
 
 
   public constructor()
@@ -55,7 +68,7 @@ class Blockchain
   public addBlock (newBlock: Block): void
   {
     newBlock.previousHash = this.getLatestBlock().hash;
-    newBlock.hash = newBlock.calculateHash();
+    newBlock.mineBlock(this.difficulty);
     this.chain.push(newBlock);
   }
 
@@ -76,11 +89,16 @@ class Blockchain
 }
 
 
-let ampsicoraCoin = new Blockchain();
-let block = new Block(1, "1/1/2018", "Amount: 5");
-let block2 = new Block(2, "2/1/2018", "Amount: 10");
-ampsicoraCoin.addBlock(block);
-ampsicoraCoin.addBlock(block2);
+let typeCoin = new Blockchain();
 
-console.log(JSON.stringify(ampsicoraCoin, null, 4));
-console.log("Is chain valid? " + ampsicoraCoin.isChainValid());
+let block = new Block(1, "1/1/2018", "Amount: 5");
+console.log("Mine Block 1...");
+typeCoin.addBlock(block);
+
+let block2 = new Block(2, "2/1/2018", "Amount: 10");
+console.log("Mine Block 2...");
+typeCoin.addBlock(block2);
+
+
+ console.log(JSON.stringify(typeCoin, null, 4));
+// console.log("Is chain valid? " + typeCoin.isChainValid());
